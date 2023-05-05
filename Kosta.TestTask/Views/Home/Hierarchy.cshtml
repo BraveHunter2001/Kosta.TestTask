@@ -1,0 +1,38 @@
+﻿@model HierarchyDepartment
+@{
+    var tree = Model.Hierarchy;
+    var root = Model.Root;
+    var urlToEmplController = Url.Action("EmployeesByDepartment", "Home");
+    StringBuilder sb = new StringBuilder();
+    void DFS(Department root)
+    {
+        string url = urlToEmplController + "?id=" + root.ID;
+        string itemHier = $"<a href=\"{url}\">[{root.Code}] {root.Name}</a>";
+        if (tree[root] != null)
+            sb.AppendLine($"<span class=\"caret\" >{itemHier}</span>");
+
+        if (tree[root] == null)
+        {
+            sb.AppendLine($"<span >{itemHier}</span>");
+            return;
+        }
+
+        sb.AppendLine($"<ul class=\"nested\">");
+        foreach (var item in tree[root])
+        {
+            sb.AppendLine($"<li>");
+            DFS(item);
+            sb.AppendLine($"</li>");
+        }
+        sb.AppendLine($"</ul>");
+    }
+    DFS(root);
+}
+
+
+<div class="Hierarchy grid-item">
+    <ul id="myUL">
+        @Html.Raw(sb.ToString())
+    </ul>
+</div>
+

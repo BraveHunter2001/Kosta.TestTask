@@ -1,0 +1,43 @@
+﻿@model ICollection<Employee>
+@{
+    var employees = Model;
+}
+
+<div class="ListEmploeeys grid-item">
+    
+    @if (employees != null)
+    {
+        <div class="table">
+            <div class="tr">
+                <div class="th">ID</div>
+                <div class="th">SurName</div>
+                <div class ="th">FirstName</div>
+                <div class="th">Patronymic</div>
+                <div class="th">DateOfBirth</div>
+                <div class="th"> Age</div>
+                <div class="th">DocSeries</div>
+                <div class="th">DocNumber</div>
+                <div class="th">Position</div>
+            </div>
+
+        @foreach (var emp in employees)
+        {
+                <div class="tr">
+                    <div class="td">@emp.ID</div>
+                    <div class="td">@emp.SurName</div>
+                    <div class="td">@emp.FirstName</div>
+                    <div class="td">@emp.Patronymic</div>
+                    <div class="td">@emp.DateOfBirth.ToShortDateString()</div>
+                    <div class="td">@emp.Age</div>
+                    <div class="td">@emp.DocSeries</div>
+                    <div class="td">@emp.DocNumber</div>
+                    <div class="td">@emp.Position</div>
+                    <div class="td btn-change"><a href="#">change</a></div>
+                    <div class="td btn-delete"><a href="#">delete</a></div>
+                </div>
+        }
+        </div>
+    }
+
+ 
+</div>

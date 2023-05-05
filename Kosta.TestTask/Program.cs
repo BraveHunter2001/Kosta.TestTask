@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
-//builder.Services.AddTransient<TreeCreator>();
+builder.Services.AddTransient<TreeCreator>();
 
 builder.Services.AddDbContext<AppDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectDb"))
@@ -17,7 +17,6 @@ builder.Services.AddDbContext<AppDbContext>(
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

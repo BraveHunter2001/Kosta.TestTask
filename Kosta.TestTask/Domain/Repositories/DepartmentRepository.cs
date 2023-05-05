@@ -1,5 +1,6 @@
 ﻿using Kosta.TestTask.Domain.Entities;
 using Kosta.TestTask.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kosta.TestTask.Domain.Repositories
 {
@@ -13,12 +14,12 @@ namespace Kosta.TestTask.Domain.Repositories
         }
         public void DeleteDepartmentItem(Guid id)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public Department GetDepartmentItemById(Guid id)
         {
-            throw new NotImplementedException();
+            return _appDbContext.Departments.Include(d=>d.Employees).FirstOrDefault(d=>d.ID == id);
         }
 
         public IQueryable<Department> GetDepartmentItems()

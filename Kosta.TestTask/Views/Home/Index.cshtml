@@ -1,36 +1,6 @@
-﻿
-@{
-    var tree = ViewData["Tree"] as Dictionary<Department, List<Department>>;
-    var root = ViewData["TreeRoot"] as Department;
+﻿@model DepartmentPageViewModel
 
-    StringBuilder sb = new StringBuilder();
-    void DFS(Department root)
-    {
-        if(tree[root] != null)
-            sb.AppendLine($"<span class=\"caret\" >[{root.Code}] {root.Name}</span>");
-
-        if (tree[root] == null)
-        {
-            sb.AppendLine($"<span>[{root.Code}] {root.Name}</span>");
-            return; 
-        }
-
-        sb.AppendLine($"<ul class=\"nested\">");
-        foreach (var item in tree[root])
-        {
-            sb.AppendLine($"<li>");
-            DFS(item);
-            sb.AppendLine($"</li>");
-        }
-        sb.AppendLine($"</ul>");
-    }
-    DFS(root);
-}
-
-
-<div class="Hierarchy">
-    <ul id="myUL">
-    @Html.Raw(sb.ToString())
-    </ul>
+<div class="grid-container">
+    @await Html.PartialAsync("Hierarchy", Model.HierarchyDepartment)
+    @await Html.PartialAsync("EmployesByDepartament",Model.EmployeesDepartamentId)
 </div>
-<div class="ListEmploeeys"></div>

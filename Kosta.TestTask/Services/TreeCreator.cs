@@ -1,5 +1,6 @@
 ﻿using Kosta.TestTask.Domain.Entities;
 using Kosta.TestTask.Domain.Interfaces;
+using Kosta.TestTask.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Kosta.TestTask.Services
@@ -9,14 +10,12 @@ namespace Kosta.TestTask.Services
     {
         private readonly IDepartmentRepository _departmentRepository;
         private Dictionary<Department, List<Department>> departDic;
-        public Department Root { get; private set; }
+        private Department root;
         public TreeCreator(IDepartmentRepository departmentRepository)
         {
             _departmentRepository = departmentRepository;
         }
-
-
-        public Dictionary<Department, List<Department>> GetDeportamentDict()
+        public HierarchyDepartment GetDeportamentDict()
         {
             departDic = new Dictionary<Department, List<Department>>();
             List<Department> departments = _departmentRepository
@@ -27,7 +26,7 @@ namespace Kosta.TestTask.Services
             foreach (var dep in departments)
             {
                 if (dep.ParentDepartment == null)
-                    Root = dep;
+                    root = dep;
                 departDic.Add(dep, null);
 
             }
@@ -36,9 +35,11 @@ namespace Kosta.TestTask.Services
                 DFSDict(dep);
 
 
-            return departDic;
+            return new HierarchyDepartment() {
+                Hierarchy = departDic,
+                Root = root,
+            };
         }
-
         void DFSDict(Department department)
         {
             if (department.ParentDepartment == null)
