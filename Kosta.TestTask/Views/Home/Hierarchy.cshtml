@@ -9,7 +9,7 @@
         string url = urlToEmplController + "?id=" + root.ID;
         string itemHier = $"<a href=\"{url}\">[{root.Code}] {root.Name}</a>";
         if (tree[root] != null)
-            sb.AppendLine($"<span class=\"caret\" >{itemHier}</span>");
+            sb.AppendLine($"<span class=\"caret \" >{itemHier}</span>");
 
         if (tree[root] == null)
         {
@@ -17,7 +17,7 @@
             return;
         }
 
-        sb.AppendLine($"<ul class=\"nested\">");
+        sb.AppendLine($"<ul class=\"active\">");
         foreach (var item in tree[root])
         {
             sb.AppendLine($"<li>");
@@ -30,7 +30,7 @@
 }
 
 
-<div class="Hierarchy grid-item">
+<div class="Hierarchy">
     <ul id="myUL">
         @Html.Raw(sb.ToString())
     </ul>

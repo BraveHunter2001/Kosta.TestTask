@@ -56,14 +56,50 @@ ul, #myUL {
 .active {
     display: block;
 }
+#myUL {
+    padding: 10px;
+}
 
 #myUL li ul {
     border-left: 1px solid black;
 }
 
-.Hierarchy {
-    background-color: antiquewhite;
+
+
+.container {
+    display: flex;
+    
+    align-content: center;
+    height: 100%;
 }
+
+
+.Hierarchy {
+    flex-basis: 30%;
+    margin-right: 10px;
+    background-color: lightgray;
+}
+
+
+.Hierarchy span a:link, .Hierarchy span a:visited {
+        background-color: lightgray;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+}
+
+.Hierarchy span a:hover, .Hierarchy span a:active {
+        background-color: green;
+        color: white;
+        text-decoration: none;
+}
+
+
+.ListEmploeeys {
+    flex-basis: 70%;
+}
+
+
 
 
 .table {
@@ -71,7 +107,8 @@ ul, #myUL {
 }
 
 .tr {
-    display: table-row
+    display: table-row;
+   
 }
 
 .thead {
@@ -95,9 +132,24 @@ ul, #myUL {
 }
 
 .td, .th {
-    display: table-cell
+    display: table-cell;
+    padding: 5px;
 }
 
 .caption {
     display: table-caption
+}
+
+td a:link, td a:visited {
+    background-color: white;
+    color: black;
+    border: 2px solid green;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+}
+
+td a:hover, td a:active {
+    background-color: yellow;
+    color: white;
 }

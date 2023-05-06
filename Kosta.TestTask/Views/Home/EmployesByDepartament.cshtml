@@ -3,7 +3,7 @@
     var employees = Model;
 }
 
-<div class="ListEmploeeys grid-item">
+<div class="ListEmploeeys">
     
     @if (employees != null)
     {
@@ -32,10 +32,15 @@
                     <div class="td">@emp.DocSeries</div>
                     <div class="td">@emp.DocNumber</div>
                     <div class="td">@emp.Position</div>
-                    <div class="td btn-change"><a href="#">change</a></div>
-                    <div class="td btn-delete"><a href="#">delete</a></div>
+                    <div class="td"><a href="#">change</a></div>
+                    <div class="td"><a href="#">delete</a></div>
                 </div>
         }
+            <div class="tr">
+                <div class="td">
+                    <a href="#">Add</a>
+                </div>
+            </div>
         </div>
     }
 
