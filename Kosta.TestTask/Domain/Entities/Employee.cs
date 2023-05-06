@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Kosta.TestTask.Domain.Entities
 {
@@ -33,7 +34,6 @@ namespace Kosta.TestTask.Domain.Entities
                 return DateTime.Now.Year - DateOfBirth.Year;
             }
         }
-
 
     }
 }

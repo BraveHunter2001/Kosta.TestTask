@@ -3,6 +3,7 @@ using Kosta.TestTask.Domain.Interfaces;
 using Kosta.TestTask.Model;
 using Kosta.TestTask.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace Kosta.TestTask.Controllers
 {
@@ -29,18 +30,32 @@ namespace Kosta.TestTask.Controllers
 
 
 
-        [HttpGet]
-        public IActionResult EmployeesByDepartment(string id) {
+        [HttpPost]
+        public IActionResult EmployeesByDepartment([FromBody]string id) {
 
 
             var idGuid = Guid.Parse(id);
             var department = _departmentRepository.GetDepartmentItemById(idGuid);
-            employeesByDepartment = department.Employees;
+            List<EmployeeJsonModel> list = new List<EmployeeJsonModel>();
 
-            DepartmentPageViewModel viewModel = new DepartmentPageViewModel();
-            viewModel.HierarchyDepartment = treeCreator.GetDeportamentDict();
-            viewModel.EmployeesDepartamentId = department.Employees;
-            return View("Index", viewModel);
+            foreach (var employee in department.Employees)
+            {
+                list.Add(new EmployeeJsonModel()
+                {
+                    ID = employee.ID,
+                    SurName = employee.SurName,
+                    FirstName = employee.FirstName,
+                    Patronymic = employee.Patronymic,
+                    Age = employee.Age,
+                    DateOfBirth = employee.DateOfBirth,
+                    DocNumber = employee.DocNumber,
+                    DocSeries = employee.DocSeries,
+                    Position = employee.Position,
+                });
+            }
+          
+
+            return new JsonResult(list);
         }
     }
 }

@@ -7,7 +7,7 @@
     void DFS(Department root)
     {
         string url = urlToEmplController + "?id=" + root.ID;
-        string itemHier = $"<a href=\"{url}\">[{root.Code}] {root.Name}</a>";
+        string itemHier = $"<a class=\"links\">[{root.Code}] {root.Name}</a>";
         if (tree[root] != null)
             sb.AppendLine($"<span class=\"caret\" >{itemHier}</span>");
 
@@ -29,10 +29,73 @@
     DFS(root);
 }
 
+    
+
+
 
 <div class="Hierarchy grid-item">
     <ul id="myUL">
         @Html.Raw(sb.ToString())
     </ul>
+    <button onclick="InsertDATA()">submit(jsondata)</button>
+    <div id="output"></div>
 </div>
 
+
+
+<script type="text/javascript">
+    function OutputResult(resList) {
+        $('#output').append('<div class="table">');
+        $('#output').append(' <div class="tr">'+
+            '<div class="th"> ID </div>'+
+            '<div class="th"> SurName </div>'+
+            '<div class="th"> FirstName </div>'+
+            '<div class="th"> Patronymic </div>'+
+            '<div class="th"> DateOfBirth </div>'+
+            '<div class="th"> Age </div>'+
+            '<div class="th"> DocSeries </div>'+
+            '<div class="th"> DocNumber </div>'+
+            '<div class="th"> Position </div>'+
+           '</div>');
+        for (let i = 0; i < resList.length; i++) {
+            $('#output').append(
+                '<div class="tr">'+
+                '<div class="td">' + resList[i].id + '</div>' +
+            '<div class= "td">' + resList[i].id + '</div>' +
+            '<div class= "td">' + resList[i].id + '</div>' +
+            '<div class= "td">' + resList[i].id + '</div>' +
+            '<div class= "td">' + resList[i].id + '</div>' +
+            '<div class= "td">' + resList[i].id + '</div>' +
+            '<div class= "td">' + resList[i].id + '</div>' +
+            '<div class= "td">' + resList[i].id + '</div>' +
+            '<div class= "td">' + resList[i].id + '</div>' +
+            '<div class="td btn-change"><a href="#" >' + resList[i].id + '</a></div>' +
+            '<div class="td btn-delete "> <a href="#" >' + resList[i].id + '</a></div>' +
+            '</div>'
+            );
+        }
+
+        $('#output').append('</div>');
+    }
+
+    function InsertDATA() {
+        var id = "7228CDF7-44B0-413F-99E3-61A2412B17D8";
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("EmployeesByDepartment", "Home")',
+            data: JSON.stringify(id),
+            contentType: 'application/json',
+            dataType: "JSON",
+            success: function (r) {
+                OutputResult(r);
+                console.log(r);
+            },
+            error: function (response) {
+                console.log(response.responseText);
+            }
+        });
+    }
+
+   
+
+</script>
